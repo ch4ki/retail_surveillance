@@ -12,7 +12,7 @@ def main():
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
     # Set video input path
-    video_path = Path('/home/chaki/Projects/sample_videos/fixed_model_2.mp4')
+    video_path = Path('path_to_the_video.mp4')
 
     # Open the video file
     video = cv2.VideoCapture(str(video_path))
