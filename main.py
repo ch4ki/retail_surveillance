@@ -3,6 +3,7 @@
 import torch
 import cv2
 from pathlib import Path
+from stream_handler import VideoStreamHandler
 
 def main():
     
@@ -15,18 +16,11 @@ def main():
     video_path = Path('path_to_the_video.mp4')
 
     # Open the video file
-    video = cv2.VideoCapture(str(video_path))
+    streamer = VideoStreamHandler(str(video_path))
 
     while True:
         # Read the next frame from the video
-        ret, frame = video.read()
-
-        # Check if the frame was successfully read
-        if not ret:
-            break
-
-        # Convert the frame to RGB
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = streamer.get_frame()
 
         # Perform person detection on the frame
         results = model(frame)
