@@ -14,10 +14,10 @@ def main():
     model.classes = [0]
 
     # Set video input path
-    video_path = Path('path_to_the_video.mp4')
+    video_path = 'path_to_the_video.mp4'
 
     # Open the video file
-    streamer = VideoStreamHandler(0)
+    streamer = VideoStreamHandler(video_path)
 
     while True:
         # Read the next frame from the video
