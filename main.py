@@ -1,5 +1,4 @@
-
-   
+import numpy as np
 import torch
 import cv2
 from pathlib import Path
@@ -11,12 +10,14 @@ def main():
 
     # Load YOLOv5 model
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+    model.conf = 0.6
+    model.classes = [0]
 
     # Set video input path
     video_path = Path('path_to_the_video.mp4')
 
     # Open the video file
-    streamer = VideoStreamHandler(str(video_path))
+    streamer = VideoStreamHandler(0)
 
     while True:
         # Read the next frame from the video
@@ -28,11 +29,18 @@ def main():
         # Draw bounding boxes and labels on the frame
         results.render()
         
-        bboxes = results.xyxy
+        bboxes = results.xyxy[0].cpu().numpy()
+        ground_positions = np.zeros((bboxes.shape[0], 2))
+        ground_positions[:, 0] = (bboxes[:, 0] + bboxes[:, 2]) / 2
+        ground_positions[:, 1] = bboxes[:, 3]
         
 
         # Convert the frame back to BGR
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
+        # draw circles to the positions where people are standing
+        for center in ground_positions:
+            cv2.circle(frame, center.astype(int), 10, 0, -1)
 
         # Display the resulting frame
         cv2.imshow('YOLOv5 Person Detection', frame)
