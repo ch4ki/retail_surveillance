@@ -13,8 +13,6 @@ class VideoStreamHandler:
         if ret:
             # Convert the frame to RGB
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-
             return frame
         else:
             return None
