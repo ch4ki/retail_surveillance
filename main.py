@@ -7,9 +7,9 @@ def main():
     # Set video input path
     video_path = 'test.mp4'
 
-    # person_detector = PersonDetector(video_path)
-    # person_detector.detect()
-    # person_detector.save_detections("detections.npy")
+    person_detector = PersonDetector(video_path)
+    person_detector.detect()
+    person_detector.save_detections("detections.npy")
 
     heatmap_generator = HeatmapGenerator("detections.npy", 1270, 720)
     heatmap_generator.create_heatmap(0, 3000)

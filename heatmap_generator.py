@@ -6,7 +6,7 @@ class HeatmapGenerator:
         self.detections = np.load(detections_path)
         self.video_width = video_width
         self.video_height = video_height
-        self.detection_map = np.zeros((video_height, video_width), dtype=np.uint64)
+        self.detection_map = np.zeros((video_height, video_width), dtype=np.uint32)
         self.heatmap = np.zeros((video_height, video_width), dtype=np.uint8)
 
     def create_heatmap(self, first_frame, last_frame):
