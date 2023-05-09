@@ -12,7 +12,7 @@ def main():
     person_detector.save_detections("detections.npy")
 
     heatmap_generator = HeatmapGenerator("detections.npy", 1270, 720)
-    heatmap_generator.create_heatmap(0, 3000)
+    heatmap_generator.create_heatmap(0, 3000, 1)
 
     return 0
 
