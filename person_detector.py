@@ -36,10 +36,8 @@ class PersonDetector:
             ground_positions[:, 1] = bboxes[:, 3].clip(0, frame.shape[0] - 1)
 
             # add this frame to detections
-            next_frame = 1
             for center in ground_positions:
-                self.detections.append(np.array([next_frame, center[0], center[1]], dtype=np.uint16))
-                next_frame = 0
+                self.detections.append(np.array([frame_num, center[0], center[1]], dtype=np.uint32))
 
             # Convert the frame back to BGR
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
